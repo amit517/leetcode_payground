@@ -6,26 +6,18 @@ fun main() {
 
 class Solution {
     fun maxProfit(prices: IntArray): Int {
-        return if (prices.isNotEmpty()) {
-            var buyPrice = prices[0]
-            var sellPrice = 0
-            for (i in prices.indices) {
-                if (buyPrice > prices[i]) {
-                    buyPrice = prices[i]
-                    sellPrice = 0
-                    continue
-                }
-                if (sellPrice < prices[i] && prices[i] > buyPrice) {
-                    sellPrice = prices[i]
-                }
+        var lowestBuyPrice = Int.MAX_VALUE
+        var overAllProfit = 0
+
+        for (i in prices.indices) {
+            if (prices[i] < lowestBuyPrice){
+                lowestBuyPrice = prices[i]
             }
-            if (sellPrice - buyPrice < 0) {
-                0
-            } else {
-                sellPrice - buyPrice
+            if (overAllProfit <  prices[i] - lowestBuyPrice){
+                overAllProfit = prices[i] - lowestBuyPrice
             }
-        } else {
-            0
         }
+
+        return overAllProfit
     }
 }
