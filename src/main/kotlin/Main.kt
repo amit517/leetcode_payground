@@ -1,23 +1,23 @@
 fun main() {
-    val arr: IntArray = intArrayOf(7,6,4,3,1)
+    val arr: IntArray = intArrayOf(1,2,3,4)
     val solution = Solution()
-    println(solution.maxProfit(arr))
+    println(solution.containsDuplicate(arr))
 }
 
 class Solution {
-    fun maxProfit(prices: IntArray): Int {
-        var lowestBuyPrice = Int.MAX_VALUE
-        var overAllProfit = 0
-
-        for (i in prices.indices) {
-            if (prices[i] < lowestBuyPrice){
-                lowestBuyPrice = prices[i]
+    fun containsDuplicate(nums: IntArray): Boolean {
+        var finalResult = false
+        for (i in nums.indices) {
+            for (j in i + 1 until nums.size) {
+                if (nums[i] == nums[j]) {
+                    finalResult = true
+                    break
+                }
             }
-            if (overAllProfit <  prices[i] - lowestBuyPrice){
-                overAllProfit = prices[i] - lowestBuyPrice
+            if (finalResult) {
+                break
             }
         }
-
-        return overAllProfit
+        return finalResult
     }
 }
