@@ -1,8 +1,10 @@
 fun main() {
     val solution = Solution()
-    val numSt = Integer.parseUnsignedInt("11111111111111111111111111111101", 2)
-    println(numSt)
-    println(solution.hammingWeight(numSt))
+
+    //println(solution.countBits(2))
+    solution.countBits(2).forEach {
+        println(it)
+    }
 }
 
 class Solution {
@@ -17,5 +19,20 @@ class Solution {
             }
         }
         return numberOfOne
+    }
+
+    fun countBits(n: Int): IntArray {
+        val mutableArray = mutableListOf<Int>()
+        for (number in 0..n) {
+            val binary = Integer.toBinaryString(number)
+            var numberOfOne = 0
+            for (element in binary) {
+                if (element == '1') {
+                    numberOfOne += 1
+                }
+            }
+            mutableArray.add(numberOfOne)
+        }
+        return mutableArray.toTypedArray().toIntArray()
     }
 }
