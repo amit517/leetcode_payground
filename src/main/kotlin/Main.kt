@@ -1,13 +1,28 @@
 fun main() {
     val solution = Solution()
-
-    //println(solution.countBits(2))
-    solution.countBits(2).forEach {
-        println(it)
-    }
+    val array = mutableListOf(9,6,4,2,3,5,7,0,1)
+    println(solution.missingNumber(array.toIntArray()))
 }
 
 class Solution {
+
+    fun missingNumber(nums: IntArray): Int {
+
+        val heightNumber = nums.size
+        var givenNumberSum = 0
+        nums.forEach {
+            givenNumberSum += it
+        }
+        return addNumbers(heightNumber) - givenNumberSum
+    }
+
+    private fun addNumbers(num: Int): Int {
+        return if (num != 0)
+            num + addNumbers(num - 1)
+        else
+            num
+    }
+
     fun hammingWeight(n: Int): Int {
         val binary = Integer.toBinaryString(n)
         var numberOfOne = 0
