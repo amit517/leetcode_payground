@@ -1,10 +1,19 @@
+import kotlin.math.pow
+
 fun main() {
     val solution = Solution()
-    val array = mutableListOf(9,6,4,2,3,5,7,0,1)
-    println(solution.missingNumber(array.toIntArray()))
+    val numSt = Integer.parseUnsignedInt("11111111111111111111111111111101", 2)
+    println(solution.reverseBits(numSt))
 }
 
 class Solution {
+
+    fun reverseBits(n: Int): Int {
+        val binary = String.format("%32s", Integer.toBinaryString(n)).replace(' ', '0')
+        val reverse = binary.reversed()
+        val v2 = reverse.toLong(2)
+        return v2.toInt()
+    }
 
     fun missingNumber(nums: IntArray): Int {
 
