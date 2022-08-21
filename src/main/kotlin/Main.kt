@@ -2,12 +2,15 @@ fun main() {
     val lionAnimal : Animle = Lion() // Child can be cast to its parent. Will get the behaviour of the child. If we call any method we will get the child methods
     lionAnimal.sleep()
     lionAnimal.eat()
-    (lionAnimal as Lion).roar() // We are explecetingly saying the compiler that this is an instance of lion
+    (lionAnimal as Lion).roarr() // We are explecetingly saying the compiler that this is an instance of lion
+    lionAnimal.roarr()
+
+    lionAnimal.controlTemp() // Calling it's parent methdo
 
     val mammalAnimal : Animle = Mammal() // Automatic upper cast possible
 //    val mammalLion : Lion = Mammal() //Parent can't be cast to its child
 
-    (mammalAnimal as Lion).roar() // will lead to run time exception. as we are telling the compiler that it is a Lion object. But actually it's a mammal object which is a child of mammal. child cant be cast to it's parent.
+//    (mammalAnimal as Lion).roar() // will lead to run time exception. as we are telling the compiler that it is a Lion object. But actually it's a mammal object which is a child of mammal. child cant be cast to it's parent.
 }
 
 class Solution {

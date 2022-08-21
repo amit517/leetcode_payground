@@ -5,4 +5,8 @@ open class Animle {
     fun eat(){
         println("eat")
     }
+
+    open fun roarr(){
+        println("animle roaring ***** *** ** *")
+    }
 }

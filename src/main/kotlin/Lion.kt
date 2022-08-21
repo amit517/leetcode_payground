@@ -4,7 +4,7 @@ class Lion : Mammal() {
         println("Override sleep from lion")
     }
 
-    fun roar(){
+    override fun roarr(){
         println("Lion roaring")
     }
 }
