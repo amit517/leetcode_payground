@@ -7,6 +7,21 @@ fun main() {
 }
 
 class Solution {
+    fun anagramChecker(s: String, t: String): Boolean {
+        var tem = t
+        if (s == null || t == null) return false
+        if (s.length != t.length) return false
+
+        for (i in s.indices) {
+            if (!tem.contains(s[i])) {
+                return false
+            }
+            val char = s[i]
+            tem = tem.replaceFirst(char.toString(), "", false)
+        }
+        return true
+    }
+
     fun strStr(haystack: String, needle: String): Int {
         return haystack.indexOf(needle)
     }
