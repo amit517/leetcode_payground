@@ -2,11 +2,41 @@ import kotlin.math.max
 
 fun main() {
     val solution = Solution()
-    val array = arrayOf(1,8,6,2,5,4,8,3,7)
-    println(solution.maxArea(array.toIntArray()))
+
+    val list = mutableListOf("eat", "tea", "tan", "ate", "nat", "bat")
+    println(solution.groupAnagrams(list.toTypedArray()))
 }
 
 class Solution {
+    fun groupAnagrams(strs: Array<String>): List<List<String>> {
+        var pointer_a = 0
+        var pointer_b = 0
+        var temInput = strs.toMutableList()
+
+        val resultList = mutableListOf<List<String>>()
+
+        while (pointer_a < temInput.size) {
+            val tempListInsideLoop = mutableListOf<String>()
+            tempListInsideLoop.add(temInput[pointer_a])
+            temInput.removeAt(pointer_a)
+
+            while (pointer_b < temInput.size) {
+                if (anagramChecker(tempListInsideLoop.last(), temInput[pointer_b])) {
+                    tempListInsideLoop.add(temInput[pointer_b])
+                    temInput.removeAt(pointer_b)
+                    continue
+                }
+                pointer_b += 1
+            }
+            if (tempListInsideLoop.isNotEmpty()) {
+                resultList.add(tempListInsideLoop)
+            }
+
+            pointer_b = 0
+        }
+        return resultList
+    }
+
     fun anagramChecker(s: String, t: String): Boolean {
         var tem = t
         if (s == null || t == null) return false
@@ -34,10 +64,10 @@ class Solution {
         while (pointerA < pointerB) {
             if (height[pointerA] < height[pointerB]) {
                 maxArea = max(maxArea, height[pointerA] * (pointerB - pointerA))
-                pointerA+=1
+                pointerA += 1
             } else {
                 maxArea = max(maxArea, height[pointerB] * (pointerB - pointerA))
-                pointerB-=1
+                pointerB -= 1
             }
         }
         return maxArea
