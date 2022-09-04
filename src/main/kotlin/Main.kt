@@ -8,6 +8,25 @@ fun main() {
 }
 
 class Solution {
+
+    fun climbStairs(n: Int): Int {
+        if (n == 1) {
+            return 1
+        }
+        if (n == 2) {
+            return 2
+        }
+        var current = 0
+        var pointer1 = 2
+        var pointer2 = 1
+        for (i in 3..n) {
+            current = pointer1 + pointer2
+            pointer2 = pointer1
+            pointer1 = current
+        }
+        return current
+    }
+
     fun groupAnagrams(strs: Array<String>): List<List<String>> {
         var pointer_a = 0
         var pointer_b = 0
