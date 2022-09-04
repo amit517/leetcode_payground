@@ -2,102 +2,92 @@ import kotlin.math.max
 
 fun main() {
     val solution = Solution()
-    val array = arrayOf(1,8,6,2,5,4,8,3,7)
-    println(solution.maxArea(array.toIntArray()))
+    println(solution.climbStairs(5))
 }
 
 class Solution {
-    fun strStr(haystack: String, needle: String): Int {
-        return haystack.indexOf(needle)
+    fun climbStairs(n: Int): Int {
+        if (n == 1) {
+            return 1
+        }
+        if (n == 2) {
+            return 2
+        }
+        var current = 0
+        var pointer1 = 2
+        var pointer2 = 1
+        for (i in 3..n) {
+            current = pointer1 + pointer2
+            pointer2 = pointer1
+            pointer1 = current
+        }
+        return current
     }
 
-    fun maxArea(height: IntArray): Int {
-        var maxArea = 0
-        var pointerA = 0
-        var pointerB = height.size - 1
-
-        while (pointerA < pointerB) {
-            if (height[pointerA] < height[pointerB]) {
-                maxArea = max(maxArea, height[pointerA] * (pointerB - pointerA))
-                pointerA+=1
+    fun solution(S: String): Int {
+        var totalInputs = S.split("\n")
+        var numberArr: ArrayList<String> = ArrayList()
+        var timeArray: ArrayList<String> = ArrayList()
+        var map: HashMap<String, Int> = HashMap()
+        for (i in totalInputs) {
+            var numberAndTime = i.split(",")
+            var number = numberAndTime[1]
+            var time = numberAndTime[0]
+            numberArr.add(number)
+            timeArray.add(time)
+        }
+        var maxTime = 0
+        var maxTimeNumber = "0"
+        var totalPrice = 0
+        for (i in 0..numberArr.size - 1) {
+            var currentCallTime = timeArray[i]
+            var times = currentCallTime.split(":")
+            var hour = times[0].toInt()
+            var minute = times[1].toInt()
+            var second = times[2].toInt()
+            var totalSecond = hour * 3600 + minute * 60 + second
+            if (totalSecond >= 300) {
+                val totalMinute = totalSecond / 60
+                var second = totalSecond % 60
+                totalPrice += totalMinute * 150
+                if (second > 0) totalPrice += 150
             } else {
-                maxArea = max(maxArea, height[pointerB] * (pointerB - pointerA))
-                pointerB-=1
+                totalPrice += totalSecond * 3
             }
-        }
-        return maxArea
-    }
+            var numberToStore = numberArr[i].replace("-", "")
 
-    fun subIntSummation(number: Int): Int {
-        var string = number.toString()
-
-        for (i in string.indices) {
-            for (j in (i + 1) until string.length) {
-                val sb = StringBuilder(string).also {
-                    val previousChar = string[i]
-                    println("previous char for index $i is $previousChar")
-
-                    it.setCharAt(i, string[j])
-                    it.setCharAt(j, previousChar)
-                }
-                val result = sb.toString()
-                println(result)
-            }
-        }
-
-
-        return 0
-    }
-
-    fun reverseBits(n: Int): Int {
-        val binary = String.format("%32s", Integer.toBinaryString(n)).replace(' ', '0')
-        val reverse = binary.reversed()
-        val v2 = reverse.toLong(2)
-        return v2.toInt()
-    }
-
-    fun missingNumber(nums: IntArray): Int {
-
-        val heightNumber = nums.size
-        var givenNumberSum = 0
-        nums.forEach {
-            givenNumberSum += it
-        }
-        return addNumbers(heightNumber) - givenNumberSum
-    }
-
-    private fun addNumbers(num: Int): Int {
-        return if (num != 0)
-            num + addNumbers(num - 1)
-        else
-            num
-    }
-
-    fun hammingWeight(n: Int): Int {
-        val binary = Integer.toBinaryString(n)
-        var numberOfOne = 0
-        binary?.let {
-            for (element in it) {
-                if (element == '1') {
-                    numberOfOne += 1
+            var alreadyCallTimeLogged = map.getOrDefault(numberToStore, 0)
+            map.put(numberToStore, alreadyCallTimeLogged + totalSecond)
+            if (alreadyCallTimeLogged + totalSecond > maxTime) {
+                maxTime = alreadyCallTimeLogged + totalSecond
+                maxTimeNumber = numberToStore
+            } else if (alreadyCallTimeLogged + totalSecond == maxTime) {
+                if (numberToStore.toInt() < maxTimeNumber.toInt()) {
+                    maxTime = alreadyCallTimeLogged + totalSecond
+                    maxTimeNumber = numberToStore
                 }
             }
         }
-        return numberOfOne
-    }
-
-    fun countBits(n: Int): IntArray {
-        val mutableArray = mutableListOf<Int>()
-        for (number in 0..n) {
-            val binary = Integer.toBinaryString(number)
-            var numberOfOne = 0
-            for (element in binary) {
-                if (element == '1') {
-                    numberOfOne += 1
+        for (i in 0..numberArr.size - 1) {
+            var numberToStore = numberArr[i].replace("-", "")
+            if (numberToStore == maxTimeNumber) {
+                var currentCallTime = timeArray[i]
+                var times = currentCallTime.split(":")
+                var hour = times[0].toInt()
+                var minute = times[1].toInt()
+                var second = times[2].toInt()
+                var totalSecond = hour * 3600 + minute * 60 + second
+                if (totalSecond >= 300) {
+                    val totalMinute = totalSecond / 60
+                    var second = totalSecond % 60
+                    totalPrice -= totalMinute * 150
+                    if (second > 0) totalPrice -= 150
+                } else {
+                    totalPrice -= totalSecond * 3
                 }
             }
-            mutableArray.add(numberOfOne)
         }
-        return mutableArray.toTypedArray().toIntArray()
+        return totalPrice
     }
+
 }
