@@ -8,10 +8,17 @@ fun main() {
     b.next = c
     c.next = d
 
-//    printLinkedListValue(a)
+    printLinkedListValue(reverseLinkedList(a))
 //    println(getValueArrayFromLinkedlist(a))
 //    println(getTotalSumOfLinkedList(a))
 //    println(getValueByIndex(a, 10))
+}
+
+fun reverseLinkedList(head: Node<Int>?, previousNode: Node<Int>? = null): Node<Int>? {
+    if (head == null) return previousNode
+    var temp = head.next
+    head.next = previousNode
+    return reverseLinkedList(temp, head)
 }
 
 fun getValueByIndex(head: Node<Int>?, target: Int): Int? {
