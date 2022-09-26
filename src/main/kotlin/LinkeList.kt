@@ -4,14 +4,39 @@ fun main() {
     val c = Node(value = 3)
     val d = Node(value = 7)
 
+    //second list
+    val e = Node(value = 12)
+    val f = Node(value = 18)
+    val g = Node(value = 13)
+    val h = Node(value = 17)
+
     a.next = b
     b.next = c
     c.next = d
 
-    printLinkedListValue(reverseLinkedList(a))
+    e.next = f
+    f.next = g
+    g.next = h
+
+    printLinkedListValue(zipperListProblem(a, e))
 //    println(getValueArrayFromLinkedlist(a))
 //    println(getTotalSumOfLinkedList(a))
 //    println(getValueByIndex(a, 10))
+}
+
+fun zipperListProblem(
+    listOne: Node<Int>?,
+    listTwo: Node<Int>?
+): Node<Int>? {
+    if (listOne == null && listTwo == null) return null
+    if (listOne == null) return listTwo
+    if (listTwo == null) return listOne
+
+    var next_1 = listOne.next
+    var next_2 = listTwo.next
+    listOne.next = listTwo
+    listTwo.next = zipperListProblem(next_1, next_2)
+    return listOne
 }
 
 fun reverseLinkedList(head: Node<Int>?, previousNode: Node<Int>? = null): Node<Int>? {
