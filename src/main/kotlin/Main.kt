@@ -3,11 +3,40 @@ import kotlin.math.max
 fun main() {
     val solution = Solution()
 
-    val list = mutableListOf("eat", "tea", "tan", "ate", "nat", "bat")
-    println(solution.groupAnagrams(list.toTypedArray()))
+    val list = mutableListOf(2,3,6,7)
+    println(solution.calculateCombinationSum(list.toIntArray(), 7))
 }
 
 class Solution {
+
+     /*fun combinationSum(candidates: IntArray, target: Int): List<List<Int>> {
+         val mutableList = mutableListOf<List<Int>>()
+
+        candidates.forEachIndexed { index, value ->
+            var combinationalResult = calculateCombinationSum(candidates,value)
+            combinationalResult?.let {
+                mutableList.add(it)
+            }
+        }
+
+        return mutableList
+
+    }*/
+
+    fun calculateCombinationSum(candidates: IntArray, target: Int): MutableList<Int>? {
+        if (target == 0) return mutableListOf()
+        if (target < 0) return null
+
+        candidates.forEachIndexed { index, value ->
+            var remainder = target - value
+            var remainderResult = calculateCombinationSum(candidates, remainder)
+            if (remainderResult != null) {
+                remainderResult.add(value)
+                return remainderResult
+            }
+        }
+        return null
+    }
 
     fun climbStairs(n: Int): Int {
         if (n == 1) {
