@@ -10,7 +10,14 @@ fun main() {
 
 //    printLinkedListValue(a)
 //    println(getValueArrayFromLinkedlist(a))
-    println(getTotalSumOfLinkedList(a))
+//    println(getTotalSumOfLinkedList(a))
+//    println(getValueByIndex(a, 10))
+}
+
+fun getValueByIndex(head: Node<Int>?, target: Int): Int? {
+    if (head == null) return null
+    if (target == 0) return head.value
+    return getValueByIndex(head.next, (target - 1))
 }
 
 fun getTotalSumOfLinkedList(head: Node<Int>?): Int {
