@@ -1,15 +1,21 @@
 fun main() {
-    val a = Node(value = 1)
-    val b = Node(value = 2)
+    val a = Node(value = 2)
+    val b = Node(value = 8)
     val c = Node(value = 3)
-    val d = Node(value = 4)
+    val d = Node(value = 7)
 
     a.next = b
     b.next = c
     c.next = d
 
 //    printLinkedListValue(a)
-    println(getValueArrayFromLinkedlist(a))
+//    println(getValueArrayFromLinkedlist(a))
+    println(getTotalSumOfLinkedList(a))
+}
+
+fun getTotalSumOfLinkedList(head: Node<Int>?): Int {
+    if (head == null) return 0
+    return head.value + getTotalSumOfLinkedList(head.next)
 }
 
 fun getValueArrayFromLinkedlist(head: Node<Int>?): MutableList<Int>? {
