@@ -11,11 +11,17 @@ fun main() {
     printLinkedListValue(a)
 }
 
-fun printLinkedListValue(a: Node<Int>) {
-    var currentNode: Node<Int>? = a
+fun printLinkedListValue(head: Node<Int>?) {
+    // Non-recursive process
+    /*var currentNode: Node<Int>? = a
 
     while (currentNode != null) {
         println(currentNode.value)
         currentNode = currentNode.next
-    }
+    }*/
+
+    // Recursive Process
+    if (head == null) return
+    println(head.value)
+    printLinkedListValue(head.next)
 }
