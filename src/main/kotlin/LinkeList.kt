@@ -1,26 +1,27 @@
 fun main() {
     val a = Node(value = 1)
     val b = Node(value = 2)
+    val c = Node(value = 4)
 
     //second list
-    val e = Node(value = 12)
-    val f = Node(value = 18)
-    val g = Node(value = 13)
-    val h = Node(value = 17)
+    val e = Node(value = 1)
+    val f = Node(value = 3)
+    val g = Node(value = 4)
+    val h = Node(value = 5)
 
     a.next = b
-
+    b.next = c
 
     e.next = f
     f.next = g
     g.next = h
 
-//    printLinkedListValue(zipperListProblem(a, e))
+    printLinkedListValue(mergeTwoLists(a, e))
 //    println(getValueArrayFromLinkedlist(a))
 //    println(getTotalSumOfLinkedList(a))
 //    println(getValueByIndex(a, 10))
 //    println(hasCycle(a))
-    println(printLinkedListInReverseOrder(e))
+//    println(printLinkedListInReverseOrder(e))
 }
 
 fun printLinkedListInReverseOrder (head: Node<Int>?){
@@ -29,26 +30,25 @@ fun printLinkedListInReverseOrder (head: Node<Int>?){
     println(head.value)
 }
 
-/*
-fun mergeTwoLists(list1: Node<Int>?, list2: Node<Int>?): Node<Int>? {
+fun mergeTwoLists(listOne: Node<Int>?, listTwo: Node<Int>?): Node<Int>? {
+    if (listOne == null && listTwo == null) return null
+    if (listOne == null) return listTwo
+    if (listTwo == null) return listOne
+    // storing the value of next elements
+    // Just keeping this for future understanding
+    // we can change the variable with equivalent assignment
 
-//todo ongoing process
-//todo will do later.
+    var next_1 = listOne.next
+    var next_2 = listTwo.next
 
-    val head = if (list1 == null) list2
-    else if (list2 == null) list1
-    else if (list1.value > list2.value) list1
-    else list2
-
-    var current = head
-
-    while (current != null) {
-        head.next =
+    return if (listOne.value < listTwo.value){
+        listOne.next = mergeTwoLists(next_1, listTwo)
+        listOne
+    }else{
+        listTwo.next = mergeTwoLists(next_2,listOne )
+        listTwo
     }
-
-    return head
-
-}*/
+}
 
 fun hasCycle(head: Node<Int>?): Boolean {
     var currentNode = head
