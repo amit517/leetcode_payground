@@ -1,10 +1,10 @@
 fun main() {
-    val a = Node(value = 1)
+    val a = Node(value = 2)
     val b = Node(value = 2)
     val c = Node(value = 4)
 
     //second list
-    val e = Node(value = 1)
+    val e = Node(value = -1)
     val f = Node(value = 3)
     val g = Node(value = 4)
     val h = Node(value = 5)
@@ -16,7 +16,8 @@ fun main() {
     f.next = g
     g.next = h
 
-    printLinkedListValue(mergeTwoLists(a, e))
+    val lists = arrayListOf<Node<Int>?>(a, null, e)
+    printLinkedListValue(mergeKLists(lists.toTypedArray()))
 //    println(getValueArrayFromLinkedlist(a))
 //    println(getTotalSumOfLinkedList(a))
 //    println(getValueByIndex(a, 10))
@@ -24,10 +25,14 @@ fun main() {
 //    println(printLinkedListInReverseOrder(e))
 }
 
-fun printLinkedListInReverseOrder (head: Node<Int>?){
-    if (head == null) return
-    printLinkedListInReverseOrder(head.next)
-    println(head.value)
+fun mergeKLists(lists: Array<Node<Int>?>): Node<Int>? {
+
+    var sortedNode: Node<Int>? = null
+
+    for (i in 0 until lists.size) {
+        sortedNode = mergeTwoLists(sortedNode, lists[i])
+    }
+    return sortedNode
 }
 
 fun mergeTwoLists(listOne: Node<Int>?, listTwo: Node<Int>?): Node<Int>? {
@@ -38,17 +43,21 @@ fun mergeTwoLists(listOne: Node<Int>?, listTwo: Node<Int>?): Node<Int>? {
     // Just keeping this for future understanding
     // we can change the variable with equivalent assignment
 
-    var next_1 = listOne.next
-    var next_2 = listTwo.next
-
-    return if (listOne.value < listTwo.value){
-        listOne.next = mergeTwoLists(next_1, listTwo)
+    return if (listOne.value < listTwo.value) {
+        listOne.next = mergeTwoLists(listOne.next, listTwo)
         listOne
-    }else{
-        listTwo.next = mergeTwoLists(next_2,listOne )
+    } else {
+        listTwo.next = mergeTwoLists(listTwo.next, listOne)
         listTwo
     }
 }
+
+fun printLinkedListInReverseOrder(head: Node<Int>?) {
+    if (head == null) return
+    printLinkedListInReverseOrder(head.next)
+    println(head.value)
+}
+
 
 fun hasCycle(head: Node<Int>?): Boolean {
     var currentNode = head
