@@ -1,8 +1,6 @@
 fun main() {
-    val a = Node(value = 2)
-    val b = Node(value = 8)
-    val c = Node(value = 3)
-    val d = Node(value = 7)
+    val a = Node(value = 1)
+    val b = Node(value = 2)
 
     //second list
     val e = Node(value = 12)
@@ -11,17 +9,33 @@ fun main() {
     val h = Node(value = 17)
 
     a.next = b
-    b.next = c
-    c.next = d
+
 
     e.next = f
     f.next = g
     g.next = h
 
-    printLinkedListValue(zipperListProblem(a, e))
+//    printLinkedListValue(zipperListProblem(a, e))
 //    println(getValueArrayFromLinkedlist(a))
 //    println(getTotalSumOfLinkedList(a))
 //    println(getValueByIndex(a, 10))
+//    println(hasCycle(a))
+}
+
+fun hasCycle(head: Node<Int>?): Boolean {
+    var currentNode = head
+    val mutableMap = mutableListOf<Node<Int>>()
+
+    while (currentNode != null) {
+        if (mutableMap.contains(currentNode)) {
+            return true
+        } else {
+            mutableMap.add(currentNode)
+        }
+
+        currentNode = currentNode.next
+    }
+    return false
 }
 
 fun zipperListProblem(
