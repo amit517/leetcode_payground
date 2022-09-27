@@ -3,25 +3,25 @@ import kotlin.math.max
 fun main() {
     val solution = Solution()
 
-    val list = mutableListOf(2,3,6,7)
-    println(solution.calculateCombinationSum(list.toIntArray(), 7))
+    val list = mutableListOf(4,5,6,7,0,1,)
+    println(solution.findMin(list.toIntArray()))
 }
 
 class Solution {
 
-     /*fun combinationSum(candidates: IntArray, target: Int): List<List<Int>> {
-         val mutableList = mutableListOf<List<Int>>()
+    /*fun combinationSum(candidates: IntArray, target: Int): List<List<Int>> {
+        val mutableList = mutableListOf<List<Int>>()
 
-        candidates.forEachIndexed { index, value ->
-            var combinationalResult = calculateCombinationSum(candidates,value)
-            combinationalResult?.let {
-                mutableList.add(it)
-            }
-        }
+       candidates.forEachIndexed { index, value ->
+           var combinationalResult = calculateCombinationSum(candidates,value)
+           combinationalResult?.let {
+               mutableList.add(it)
+           }
+       }
 
-        return mutableList
+       return mutableList
 
-    }*/
+   }*/
 
     fun calculateCombinationSum(candidates: IntArray, target: Int): MutableList<Int>? {
         if (target == 0) return mutableListOf()
@@ -36,6 +36,25 @@ class Solution {
             }
         }
         return null
+    }
+
+    fun findMin(nums: IntArray): Int {
+        if (nums.isEmpty()) return 0
+
+        var pointer_a = 0
+        var pointer_b = 1
+
+        while (pointer_a < nums.size && pointer_b < nums.size && nums[pointer_a] < nums[pointer_b]) {
+            pointer_a++
+            pointer_b++
+        }
+
+
+        return if (pointer_a + 1 == nums.size) {
+            nums[0]
+        } else {
+            nums[pointer_a+1]
+        }
     }
 
     fun climbStairs(n: Int): Int {
