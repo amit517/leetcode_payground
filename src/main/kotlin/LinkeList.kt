@@ -20,7 +20,15 @@ fun main() {
 //    println(getTotalSumOfLinkedList(a))
 //    println(getValueByIndex(a, 10))
 //    println(hasCycle(a))
+    println(printLinkedListInReverseOrder(e))
 }
+
+fun printLinkedListInReverseOrder (head: Node<Int>?){
+    if (head == null) return
+    printLinkedListInReverseOrder(head.next)
+    println(head.value)
+}
+
 /*
 fun mergeTwoLists(list1: Node<Int>?, list2: Node<Int>?): Node<Int>? {
 
