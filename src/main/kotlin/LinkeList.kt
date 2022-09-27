@@ -21,6 +21,26 @@ fun main() {
 //    println(getValueByIndex(a, 10))
 //    println(hasCycle(a))
 }
+/*
+fun mergeTwoLists(list1: Node<Int>?, list2: Node<Int>?): Node<Int>? {
+
+//todo ongoing process
+//todo will do later.
+
+    val head = if (list1 == null) list2
+    else if (list2 == null) list1
+    else if (list1.value > list2.value) list1
+    else list2
+
+    var current = head
+
+    while (current != null) {
+        head.next =
+    }
+
+    return head
+
+}*/
 
 fun hasCycle(head: Node<Int>?): Boolean {
     var currentNode = head
