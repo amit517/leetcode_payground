@@ -1,7 +1,9 @@
 fun main() {
-    val a = Node(value = 2)
+    val a = Node(value = 24)
     val b = Node(value = 2)
-    val c = Node(value = 4)
+    val k = Node(value = 40)
+    val l = Node(value = 50)
+    val m = Node(value = 60)
 
     //second list
     val e = Node(value = -1)
@@ -10,19 +12,44 @@ fun main() {
     val h = Node(value = 5)
 
     a.next = b
-    b.next = c
+    b.next = k
+    k.next = l
+    l.next = m
 
     e.next = f
     f.next = g
     g.next = h
 
     val lists = arrayListOf<Node<Int>?>(a, null, e)
-    printLinkedListValue(mergeKLists(lists.toTypedArray()))
+
+//    printLinkedListValue(removeNthFromEnd(a, 2))
 //    println(getValueArrayFromLinkedlist(a))
 //    println(getTotalSumOfLinkedList(a))
 //    println(getValueByIndex(a, 10))
 //    println(hasCycle(a))
 //    println(printLinkedListInReverseOrder(e))
+}
+
+fun removeNthFromEnd(
+    head: ListNode?,
+    n: Int,
+): ListNode? {
+    val dummy = ListNode(0)
+    dummy.next = head
+    traverse(dummy, n)
+    return dummy.next
+}
+
+fun traverse(
+    head: ListNode?,
+    n: Int, previousNode: ListNode? = null,
+): ListNode? {
+    if (head == null) return null
+    if (n == -1) {
+        previousNode!!.next = head.next
+        return null
+    }
+    return traverse(head.next, n - 1, head)
 }
 
 fun mergeKLists(lists: Array<Node<Int>?>): Node<Int>? {
