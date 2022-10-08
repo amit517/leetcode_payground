@@ -1,15 +1,15 @@
 fun main() {
-    val a = Node(value = 24)
-    val b = Node(value = 2)
-    val k = Node(value = 40)
-    val l = Node(value = 50)
-    val m = Node(value = 60)
+    val a = ListNode(24)
+    val b = ListNode(2)
+    val k = ListNode(40)
+    val l = ListNode(50)
+    val m = ListNode(60)
 
     //second list
-    val e = Node(value = -1)
-    val f = Node(value = 3)
-    val g = Node(value = 4)
-    val h = Node(value = 5)
+    val e = ListNode(-1)
+    val f = ListNode(3)
+    val g = ListNode(4)
+    val h = ListNode(5)
 
     a.next = b
     b.next = k
@@ -20,9 +20,10 @@ fun main() {
     f.next = g
     g.next = h
 
-    val lists = arrayListOf<Node<Int>?>(a, null, e)
+//    val lists = arrayListOf<ListNode<Int>?>(a, null, e)
 
-//    printLinkedListValue(removeNthFromEnd(a, 2))
+
+    printLinkedListValue(removeNthFromEnd(a, 2))
 //    println(getValueArrayFromLinkedlist(a))
 //    println(getTotalSumOfLinkedList(a))
 //    println(getValueByIndex(a, 10))
@@ -34,22 +35,27 @@ fun removeNthFromEnd(
     head: ListNode?,
     n: Int,
 ): ListNode? {
-    val dummy = ListNode(0)
-    dummy.next = head
-    traverse(dummy, n)
-    return dummy.next
-}
+    var current = head
+    var length = 0
 
-fun traverse(
-    head: ListNode?,
-    n: Int, previousNode: ListNode? = null,
-): ListNode? {
-    if (head == null) return null
-    if (n == -1) {
-        previousNode!!.next = head.next
-        return null
+    while (current != null) {
+        length++
+        current = current.next
     }
-    return traverse(head.next, n - 1, head)
+
+    // 1 2 3 4
+    if (length == n){
+        return head?.next
+    }
+
+    // find node to remove | index = length - n - 1
+    var nodeBeforeRemoveIndex = length - n - 1
+    current = head
+    for (i in 0 until nodeBeforeRemoveIndex) {
+        current = current?.next
+    }
+    current?.next = current?.next?.next
+    return head
 }
 
 fun mergeKLists(lists: Array<Node<Int>?>): Node<Int>? {
@@ -161,7 +167,7 @@ fun fillValues(head: Node<Int>?, mutableList: MutableList<Int>): MutableList<Int
 }
 
 
-fun printLinkedListValue(head: Node<Int>?) {
+fun printLinkedListValue(head: ListNode?) {
     // Non-recursive process
     /*var currentNode: Node<Int>? = head
 
@@ -172,6 +178,6 @@ fun printLinkedListValue(head: Node<Int>?) {
 
     // Recursive Process
     if (head == null) return
-    println(head.value)
+    println(head.`val`)
     printLinkedListValue(head.next)
 }
