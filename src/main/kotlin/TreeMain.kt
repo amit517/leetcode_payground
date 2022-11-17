@@ -2,20 +2,34 @@ import kotlin.math.max
 
 fun main() {
     var a = TreeNode(1)
-    var b = TreeNode(1)
+    var b = TreeNode(12)
     var c = TreeNode(2)
     var d = TreeNode(15)
     var e = TreeNode(7)
 
-    /*a.left = b
+    a.left = b
     a.right = c
     c.left = d
-    c.right = e*/
+    c.right = e
 
-    b.left = null
-    b.right = c
+   /* b.left = null
+    b.right = c*/
 
-    println(isSameTree(a,b))
+    println(inorderTraversal(a))
+}
+
+fun inorderTraversal(root: TreeNode?, list : List<Int>? = null): List<Int> {
+    if(root == null) return list ?: emptyList()
+
+    var mutableList = mutableListOf<Int>()
+    var left = inorderTraversal(root.left,list)
+    var right = inorderTraversal(root.right,list)
+
+    mutableList.addAll(left)
+    mutableList.add(root.`val`)
+    mutableList.addAll(right)
+
+    return mutableList
 }
 
 fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
