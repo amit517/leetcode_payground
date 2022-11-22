@@ -1,29 +1,53 @@
 import kotlin.math.max
 
+var mutableList = mutableListOf<Int>()
 fun main() {
-    var a = TreeNode(1)
-    var b = TreeNode(12)
-    var c = TreeNode(2)
-    var d = TreeNode(15)
-    var e = TreeNode(7)
+    var a = TreeNode(10)
+    var b = TreeNode(5)
+    var c = TreeNode(15)
+    var d = TreeNode(6)
+    var e = TreeNode(20)
 
     a.left = b
     a.right = c
+    b.left = null
+    b.right = null
     c.left = d
     c.right = e
 
-   /* b.left = null
-    b.right = c*/
 
-    println(inorderTraversal(a))
+    /* b.left = null
+     b.right = c*/
+
+    println(isValidBST(a))
 }
 
-fun inorderTraversal(root: TreeNode?, list : List<Int>? = null): List<Int> {
-    if(root == null) return list ?: emptyList()
+fun isValidBST(root: TreeNode): Boolean {
+    val low = -Double.MAX_VALUE
+    val high = Double.MAX_VALUE
+
+    return if (root.left == null && root.right == null) true else valid(root, low, high)
+}
+
+fun valid(root: TreeNode?, low: Double, high: Double): Boolean {
+    if (root == null) return true
+
+    //Check duplicates
+    if (root.left != null && root.left!!.`val` == root.`val`) return false
+    if (root.right != null && root.right!!.`val` == root.`val`) return false
+
+    //Check bounds of valid values
+    return if (root.`val` >= high || root.`val` <= low) false else valid(
+        root.left, low, root.`val`.toDouble()
+    ) && valid(root.right, root.`val`.toDouble(), high)
+}
+
+fun inorderTraversal(root: TreeNode?, list: List<Int>? = null): List<Int> {
+    if (root == null) return list ?: emptyList()
 
     var mutableList = mutableListOf<Int>()
-    var left = inorderTraversal(root.left,list)
-    var right = inorderTraversal(root.right,list)
+    var left = inorderTraversal(root.left, list)
+    var right = inorderTraversal(root.right, list)
 
     mutableList.addAll(left)
     mutableList.add(root.`val`)
