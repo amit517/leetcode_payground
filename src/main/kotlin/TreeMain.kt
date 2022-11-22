@@ -2,9 +2,9 @@ import kotlin.math.max
 
 var mutableList = mutableListOf<Int>()
 fun main() {
-    var a = TreeNode(10)
-    var b = TreeNode(5)
-    var c = TreeNode(15)
+    var a = TreeNode(2)
+    var b = TreeNode(1)
+    var c = TreeNode(3)
     var d = TreeNode(6)
     var e = TreeNode(20)
 
@@ -12,14 +12,26 @@ fun main() {
     a.right = c
     b.left = null
     b.right = null
-    c.left = d
-    c.right = e
+    c.left = null
+    c.right = null
 
 
     /* b.left = null
      b.right = c*/
 
-    println(isValidBST(a))
+    println(inorderTraversal(invertTree(a)))
+}
+
+fun invertTree(root: TreeNode?): TreeNode? {
+    if (root == null) return null
+
+    var left = invertTree(root.right)
+    var right = invertTree(root.left)
+
+    root.left = left
+    root.right = right
+
+    return root
 }
 
 fun isValidBST(root: TreeNode): Boolean {
