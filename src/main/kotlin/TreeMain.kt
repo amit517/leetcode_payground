@@ -21,6 +21,9 @@ fun main() {
 
     println(inorderTraversal(invertTree(a)))
 }
+fun levelOrder(root: TreeNode?): List<List<Int>> {
+    // todo https://leetcode.com/problems/binary-tree-level-order-traversal/
+}
 
 fun invertTree(root: TreeNode?): TreeNode? {
     if (root == null) return null
