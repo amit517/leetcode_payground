@@ -3,8 +3,11 @@ import kotlin.math.max
 fun main() {
     val solution = Solution()
 
-    val list = mutableListOf(4,5,6,7,0,1,)
-    println(solution.findMin(list.toIntArray()))
+    val list = mutableListOf(4, 5, 6, 7, 0, 1)
+    solution.runningSum(list.toIntArray()).forEach {
+
+        println(it)
+    }
 }
 
 class Solution {
@@ -53,7 +56,7 @@ class Solution {
         return if (pointer_a + 1 == nums.size) {
             nums[0]
         } else {
-            nums[pointer_a+1]
+            nums[pointer_a + 1]
         }
     }
 
@@ -211,5 +214,17 @@ class Solution {
             mutableArray.add(numberOfOne)
         }
         return mutableArray.toTypedArray().toIntArray()
+    }
+
+    fun runningSum(nums: IntArray): IntArray {
+        val mutableArray = mutableListOf<Int>()
+
+        mutableArray.add(nums[0])
+        for (number in 1 until nums.size) {
+            val sum = nums[number] + mutableArray.last()
+            mutableArray.add(sum)
+        }
+
+        return mutableArray.toIntArray()
     }
 }
