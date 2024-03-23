@@ -1,6 +1,6 @@
 fun main() {
     val roman = Roman()
-    println(roman.leetCode_12_intToRoman(3))
+    println(roman.codeByte_StringChallenge("XXXVVIIIIIIIIII"))
 }
 
 class Roman {
@@ -46,5 +46,19 @@ class Roman {
         }
 
         return string.toString()
+    }
+
+    // Problem details https://imgur.com/a/B85qNrb
+
+    /**
+     * Problem:
+     *  Roman input: XXXVVIIIIIIIIII
+     *  output: L
+     *
+     *  SO basically it will calculate the shortest way to represent a given roman number
+     */
+
+    fun codeByte_StringChallenge( str : String) : String{
+        return leetCode_12_intToRoman(leetcode_13_romanToInt(str))
     }
 }
