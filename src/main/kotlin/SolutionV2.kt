@@ -33,4 +33,16 @@ class SolutionV2 {
 
         return sentence1 == sentence2
     }
+
+    fun leetcode_217_containsDuplicatecontainsDuplicate(nums: IntArray): Boolean {
+        val hasmap = hashMapOf<Int, Int>()
+        nums.forEach {
+            if (hasmap.containsKey(it)){
+                return true
+            } else {
+                hasmap[it] = it
+            }
+        }
+        return false
+    }
 }
