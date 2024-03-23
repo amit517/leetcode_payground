@@ -1,6 +1,6 @@
 fun main() {
     val roman = Roman()
-
+    println(roman.leetCode_12_intToRoman(3))
 }
 
 class Roman {
@@ -31,4 +31,20 @@ class Roman {
         return sum
     }
 
+    fun leetCode_12_intToRoman(num: Int): String {
+        var givenNum = num
+        val intCode = intArrayOf(1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
+        val code = arrayOf("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
+
+        val string = StringBuilder()
+
+        for (i in intCode.indices) {
+            while (givenNum >= intCode[i]) {
+                string.append(code[i])
+                givenNum -= intCode[i]
+            }
+        }
+
+        return string.toString()
+    }
 }
