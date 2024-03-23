@@ -19,4 +19,18 @@ class SolutionV2 {
         }
         return unmatchedString
     }
+
+    fun LeetCode_1662_arrayStringsAreEqual(word1: Array<String>, word2: Array<String>): Boolean {
+        var sentence1 = ""
+        var sentence2 = ""
+
+        for (word in word1){
+            sentence1 = sentence1.plus(word)
+        }
+        for (word in word2){
+            sentence2 = sentence2.plus(word)
+        }
+
+        return sentence1 == sentence2
+    }
 }
