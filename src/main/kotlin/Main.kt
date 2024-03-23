@@ -1,13 +1,11 @@
+import java.util.*
+import kotlin.collections.HashMap
 import kotlin.math.max
 
 fun main() {
     val solution = Solution()
 
-    val list = mutableListOf(4, 5, 6, 7, 0, 1)
-    solution.runningSum(list.toIntArray()).forEach {
-
-        println(it)
-    }
+    println(solution.leetcode_20_ValidParentheses("([}}])"))
 }
 
 class Solution {
@@ -226,5 +224,35 @@ class Solution {
         }
 
         return mutableArray.toIntArray()
+    }
+
+    fun leetcode_20_ValidParentheses(s: String): Boolean {
+        if (s.length % 2 != 0) return false
+        val stack = Stack<Char>()
+
+        for (char in s) {
+            when (char) {
+                '(', '{', '[' -> {
+                    stack.push(char)
+                }
+
+                ')' -> {
+                    if (stack.isNotEmpty() && stack.peek() == '(') stack.pop()
+                    else return false
+                }
+
+                '}' -> {
+                    if (stack.isNotEmpty() && stack.peek() == '{') stack.pop()
+                    else return false
+                }
+
+                ']' -> {
+                    if (stack.isNotEmpty() && stack.peek() == '[') stack.pop()
+                    else return false
+                }
+            }
+        }
+
+        return stack.isEmpty()
     }
 }
