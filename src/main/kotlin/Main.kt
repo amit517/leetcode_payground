@@ -3,9 +3,9 @@ import kotlin.collections.HashMap
 import kotlin.math.max
 
 fun main() {
-    val solution = Solution()
+    val solution = SolutionV2()
 
-    println(solution.leetcode_20_ValidParentheses("([}}])"))
+    println(solution.ArrayChallange(arrayOf("10011", "10100")))
 }
 
 class Solution {
