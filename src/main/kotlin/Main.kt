@@ -3,9 +3,9 @@ import kotlin.collections.HashMap
 import kotlin.math.max
 
 fun main() {
-    val solution = SolutionV2()
+    val solution = Roman()
 
-    println(solution.ArrayChallange(arrayOf("10011", "10100")))
+    println(solution.leetcode_13_romanToInt("MCMXCIV"))
 }
 
 class Solution {
@@ -224,35 +224,5 @@ class Solution {
         }
 
         return mutableArray.toIntArray()
-    }
-
-    fun leetcode_20_ValidParentheses(s: String): Boolean {
-        if (s.length % 2 != 0) return false
-        val stack = Stack<Char>()
-
-        for (char in s) {
-            when (char) {
-                '(', '{', '[' -> {
-                    stack.push(char)
-                }
-
-                ')' -> {
-                    if (stack.isNotEmpty() && stack.peek() == '(') stack.pop()
-                    else return false
-                }
-
-                '}' -> {
-                    if (stack.isNotEmpty() && stack.peek() == '{') stack.pop()
-                    else return false
-                }
-
-                ']' -> {
-                    if (stack.isNotEmpty() && stack.peek() == '[') stack.pop()
-                    else return false
-                }
-            }
-        }
-
-        return stack.isEmpty()
     }
 }
