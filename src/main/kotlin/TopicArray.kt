@@ -1,10 +1,8 @@
 fun main() {
     val topicArray = TopicArray()
-    val intArray = intArrayOf(1,2,3,4,5,6,7)
-    topicArray.LC_189_rotate(intArray, 3)
-    intArray.forEach {
-        println(it)
-    }
+    println(topicArray.LC_136_singleNumber(intArrayOf(2, 2, 1)))
+    println(topicArray.LC_136_singleNumber(intArrayOf(4, 1, 2, 1, 2)))
+    println(topicArray.LC_136_singleNumber(intArrayOf(1)))
 }
 
 class TopicArray {
@@ -35,7 +33,7 @@ class TopicArray {
         var rotationCount = k
 
         while (rotationCount >= 1) {
-            var lastIndexedValue =  nums[nums.size - 1]
+            var lastIndexedValue = nums[nums.size - 1]
             for (index in nums.indices) {
                 val temp = nums[index]
                 nums[index] = lastIndexedValue
@@ -43,5 +41,22 @@ class TopicArray {
             }
             rotationCount--
         }
+    }
+
+    fun LC_136_singleNumber(nums: IntArray): Int {
+        val hashMap = HashMap<Int, Int>()
+
+        nums.forEach {
+            hashMap[it] = hashMap.getOrDefault(it, 0) + 1
+        }
+        var numberToReturn = 0
+        for ((key, value) in hashMap) {
+            if (value == 1) {
+                numberToReturn = key
+                break
+            }
+        }
+
+        return numberToReturn
     }
 }
