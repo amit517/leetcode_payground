@@ -1,8 +1,8 @@
 fun main() {
     val topicArray = TopicArray()
-    println(topicArray.LC_136_singleNumber(intArrayOf(2, 2, 1)))
-    println(topicArray.LC_136_singleNumber(intArrayOf(4, 1, 2, 1, 2)))
-    println(topicArray.LC_136_singleNumber(intArrayOf(1)))
+    topicArray.LC_350_intersect(intArrayOf(1, 2, 2, 1), intArrayOf(2, 2)).forEach {
+        println(it)
+    }
 }
 
 class TopicArray {
@@ -58,5 +58,30 @@ class TopicArray {
         }
 
         return numberToReturn
+    }
+
+    fun LC_350_intersect(nums1: IntArray, nums2: IntArray): IntArray {
+        val mutableArray = mutableListOf<Int>()
+        val smallerArray: IntArray
+        val biggerArray: IntArray
+        if (nums1.size < nums2.size) {
+            smallerArray = nums1
+            biggerArray = nums2
+        } else {
+            smallerArray = nums2
+            biggerArray = nums1
+        }
+
+        biggerArray.forEach {
+            for (index in smallerArray.indices) {
+                if (it == smallerArray[index]) {
+                    mutableArray.add(it)
+                    smallerArray[index] = -1
+                    break
+                }
+            }
+        }
+
+        return mutableArray.toIntArray()
     }
 }
