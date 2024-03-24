@@ -1,6 +1,8 @@
 fun main() {
     val topicString = TopicString()
-
+    println(topicString.LC_387_firstUniqChar("leetcode"))
+    println(topicString.LC_387_firstUniqChar("loveleetcode"))
+    println(topicString.LC_387_firstUniqChar("aabb"))
 }
 
 class TopicString {
@@ -16,5 +18,24 @@ class TopicString {
             pointer_A++
             pointer_B--
         }
+    }
+
+    fun LC_387_firstUniqChar(s: String): Int {
+        val hashMap = LinkedHashMap<Char, Int>()
+
+        for (char in s) {
+            hashMap[char] = hashMap.getOrDefault(char, 0) + 1
+        }
+
+        var nonRepIndex = -1
+
+        for ((key, value) in hashMap) {
+            if (value == 1) {
+                nonRepIndex = s.indexOf(key)
+                break
+            }
+        }
+
+        return nonRepIndex
     }
 }
