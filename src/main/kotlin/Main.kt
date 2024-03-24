@@ -24,6 +24,44 @@ class Solution {
 
    }*/
 
+
+    /**
+     * Problem statement:
+     * https://imgur.com/a/ah0F9yN
+     * GAS station problem
+     *
+     */
+    fun ArrayChallenge(strArr: Array<String>): String {
+        var gasSt = strArr[0]
+        var arr = strArr.slice(1..strArr.size - 1)
+
+        var ans = -1
+        for (i in 0..arr.size - 1) {
+            var isPossible = true
+            var cur = i
+            var gas = 0
+            for (j in i..i + arr.size) {
+                var k = j % arr.size
+                var a = arr[k].split(":")
+                var gasCur = a[0].toInt()
+                var gasNeeded = a[1].toInt()
+                var totalGas = gas + gasCur
+                if (totalGas < gasNeeded) {
+                    isPossible = false
+                    break
+                } else {
+                    gas = totalGas - gasNeeded
+                }
+            }
+            if (isPossible) {
+                ans = cur
+                break
+            }
+        }
+        if (ans != -1) return (ans + 1).toString()
+        else return "impossible"
+    }
+
     fun calculateCombinationSum(candidates: IntArray, target: Int): MutableList<Int>? {
         if (target == 0) return mutableListOf()
         if (target < 0) return null
