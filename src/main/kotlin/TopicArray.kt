@@ -1,6 +1,10 @@
 fun main() {
     val topicArray = TopicArray()
-    println(topicArray.LC_26_removeDuplicates(intArrayOf(1, 1, 2)))
+    val intArray = intArrayOf(1,2,3,4,5,6,7)
+    topicArray.LC_189_rotate(intArray, 3)
+    intArray.forEach {
+        println(it)
+    }
 }
 
 class TopicArray {
@@ -25,5 +29,19 @@ class TopicArray {
         }
 
         return uniqueNumber
+    }
+
+    fun LC_189_rotate(nums: IntArray, k: Int) {
+        var rotationCount = k
+
+        while (rotationCount >= 1) {
+            var lastIndexedValue =  nums[nums.size - 1]
+            for (index in nums.indices) {
+                val temp = nums[index]
+                nums[index] = lastIndexedValue
+                lastIndexedValue = temp
+            }
+            rotationCount--
+        }
     }
 }
