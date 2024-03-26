@@ -40,4 +40,35 @@ class TopicHashMap {
         }
         return mutableIntArray.toIntArray()
     }
+
+    /**
+     * O(n) time and space complexity
+     */
+    fun LC_347_topKFrequent_On(nums: IntArray, k: Int): IntArray {
+        val count = mutableMapOf<Int, Int>()
+        val freq = List(nums.size + 1) { mutableListOf<Int>() }
+
+        // Count occurrences of each number
+        for (n in nums) {
+            count[n] = (count[n] ?: 0) + 1
+        }
+
+        // Populate freq list based on count
+        for (n in count.keys) {
+            freq[count[n]!!].add(n)
+        }
+
+        val res = mutableListOf<Int>()
+        // Iterate through freq list in reverse order
+        for (i in freq.lastIndex downTo 1) {
+            for (n in freq[i]) {
+                res.add(n)
+                if (res.size == k) {
+                    return res.toIntArray()
+                }
+            }
+        }
+
+        return res.toIntArray()
+    }
 }
