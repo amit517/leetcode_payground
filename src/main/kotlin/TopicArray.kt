@@ -1,6 +1,6 @@
 fun main() {
     val topicArray = TopicArray()
-    topicArray.LC_350_intersect(intArrayOf(1, 2, 2, 1), intArrayOf(2, 2)).forEach {
+    topicArray.LC_238_productExceptSelf(intArrayOf(1, 2, 3, 4)).forEach {
         println(it)
     }
 }
@@ -83,5 +83,31 @@ class TopicArray {
         }
 
         return mutableArray.toIntArray()
+    }
+
+
+    fun LC_238_productExceptSelf(nums: IntArray): IntArray {
+        val arrayLength = nums.size
+
+        val outputArr = IntArray(size = arrayLength) { 0 }
+        val leftProduct = Array(size = arrayLength) { 0 }
+        val rightProduct = Array(size = arrayLength) { 0 }
+
+        leftProduct[0] = 1
+        rightProduct[arrayLength - 1] = 1
+
+        for (i in 1 until arrayLength) {
+            leftProduct[i] = nums[i - 1] * leftProduct[i - 1]
+        }
+
+        for (i in arrayLength - 2 downTo 0) {
+            rightProduct[i] = nums[i + 1] * rightProduct[i + 1]
+        }
+
+        for (i in 0 until arrayLength) {
+            outputArr[i] = leftProduct[i] * rightProduct[i]
+        }
+
+        return outputArr
     }
 }
