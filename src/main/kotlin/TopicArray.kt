@@ -1,8 +1,8 @@
+import kotlin.math.max
+
 fun main() {
     val topicArray = TopicArray()
-    topicArray.LC_238_productExceptSelf(intArrayOf(1, 2, 3, 4)).forEach {
-        println(it)
-    }
+    println(topicArray.LC_128_longestConsecutive(intArrayOf(100,4,200,1,3,2)))
 }
 
 class TopicArray {
@@ -109,5 +109,27 @@ class TopicArray {
         }
 
         return outputArr
+    }
+
+    fun LC_128_longestConsecutive(nums: IntArray): Int {
+        val numSet = HashSet<Int>()
+        for (number in nums) {
+            numSet.add(number)
+        }
+        var maxSequenceLength = 0
+        for (number in nums) {
+            var currentNum = number
+            var currentSequenceLength = 1
+
+            if (numSet.contains(currentNum - 1).not()) {
+                while (numSet.contains(currentNum + 1)) {
+                    currentNum++
+                    currentSequenceLength++
+                }
+                maxSequenceLength = max(maxSequenceLength, currentSequenceLength)
+            }
+        }
+
+        return maxSequenceLength
     }
 }
