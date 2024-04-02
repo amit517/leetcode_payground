@@ -1,7 +1,7 @@
 fun main() {
     val twoSlider = TwoSlider()
 
-    twoSlider.LC_167_twoSum(intArrayOf(2,7,11,15), 9).forEach {
+    twoSlider.LC_167_twoSum(intArrayOf(2, 7, 11, 15), 9).forEach {
         println(it)
     }
 }
@@ -30,15 +30,17 @@ class TwoSlider {
 
     fun LC_167_twoSum(numbers: IntArray, target: Int): IntArray {
         var pointer_A = 0
+        var pointer_B = numbers.size - 1
+        while (pointer_A < pointer_B) {
+            val sum = numbers[pointer_A] + numbers[pointer_B]
 
-        while (pointer_A < numbers.size - 1) {
-            var pointer_B = pointer_A + 1
-            while (pointer_B < numbers.size) {
-                if (numbers[pointer_A] + numbers[pointer_B] == target)
-                    return intArrayOf(++pointer_A, ++pointer_B)
-                pointer_B++
+            if (sum > target) {
+                pointer_B--
+            } else if (sum < target) {
+                pointer_A++
+            } else {
+                return intArrayOf(++pointer_A, ++pointer_B)
             }
-            pointer_A++
         }
 
         return intArrayOf()
