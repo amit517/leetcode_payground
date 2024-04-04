@@ -1,7 +1,7 @@
 fun main() {
     val twoSlider = TwoSlider()
 
-    twoSlider.LC_167_twoSum(intArrayOf(2, 7, 11, 15), 9).forEach {
+    twoSlider.LC_15_threeSum(intArrayOf(-1, 0, 1, 2, -1, -4)).forEach {
         println(it)
     }
 }
@@ -44,5 +44,34 @@ class TwoSlider {
         }
 
         return intArrayOf()
+    }
+
+    fun LC_15_threeSum(nums: IntArray): List<List<Int>> {
+        nums.sort()
+        val result = arrayListOf<List<Int>>()
+
+        for (i in 0 until  nums.size - 2) {
+            if (i == 0 || (i > 0 && nums[i] != nums[i - 1])) {
+                var low = i + 1
+                var high = nums.size - 1
+                val sum = 0 - nums[i]
+
+                while (low < high) {
+                    if (nums[low] + nums[high] == sum) {
+                        result.add(listOf(nums[i], nums[low], nums[high]))
+                        while (low < high && nums[low] == nums[low + 1]) low++
+                        while (low < high && nums[high] == nums[high - 1]) high--
+                        low++
+                        high--
+                    } else if (nums[low] + nums[high] > sum) {
+                        high--
+                    } else {
+                        low++
+                    }
+                }
+            }
+        }
+
+        return result
     }
 }
