@@ -1,11 +1,39 @@
 import java.util.Stack
 
 fun main() {
+    val topicStack = TopicStack()
 
+    println(topicStack.LC_150_evalRPN(arrayOf("2","1","+","3","*")))
 }
 
 class TopicStack {
 
+    fun LC_150_evalRPN(tokens: Array<String>): Int {
+        val stack = Stack<Int>()
+        for (token in tokens) {
+            if (token == "+") {
+                val num1 = stack.pop()
+                val num2 = stack.pop()
+                stack.add(num1 + num2)
+            } else if (token == "-") {
+                val num1 = stack.pop()
+                val num2 = stack.pop()
+                stack.add(num2 - num1)
+            } else if (token == "*") {
+                val num1 = stack.pop()
+                val num2 = stack.pop()
+                stack.add(num1 * num2)
+            } else if (token == "/") {
+                val num1 = stack.pop()
+                val num2 = stack.pop()
+                stack.add((num2 / num1))
+            } else{
+                stack.add(token.toInt())
+            }
+        }
+
+        return stack.pop()
+    }
 }
 
 class LC_155_MinStack() {
